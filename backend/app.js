@@ -1,14 +1,14 @@
 const express = require('express');
 const axios = require('axios');
 require('dotenv').config(); 
-//const cors = require('cors');
+const cors = require('cors');
 const apodRoutes = require('./Routes/apodRoute');
 const app = express();
 
-// Middleware para permitir requisições do frontend (React)
-/*app.use(cors({
+
+app.use(cors({
   origin: process.env.REACT_APP_API_URL  
-}));*/
+}));
 
 app.use(express.json()); 
 
