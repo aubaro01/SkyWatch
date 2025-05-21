@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 require('dotenv').config(); 
 //const cors = require('cors');
-const apodRoutes = reuire('./Routes/apodRoute');
+const apodRoutes = require('./Routes/apodRoute');
 const app = express();
 
 // Middleware para permitir requisições do frontend (React)
