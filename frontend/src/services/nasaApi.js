@@ -1,12 +1,13 @@
-const BASE_URL = `${process.env.REACT_APP_SERVER_URL}/apod`;
+import axios from 'axios';
 
-export async function fetchApodData() {
+const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/apod`;
+
+export const fetchApodData = async () => {
   try {
-    const res = await fetch(BASE_URL);
-    if (!res.ok) throw new Error('Erro ao buscar dados do backend');
-    return await res.json();
-  } catch (err) {
-    console.error(err);
-    throw err;
+    const response = await axios.get(BASE_URL);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar dados da NASA', error);
+    throw error;
   }
-}
+};
