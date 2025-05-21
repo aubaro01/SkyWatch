@@ -32,18 +32,16 @@ const Home = () => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gradient-to-b from-gray-900 to-black">
-        <div className="text-center p-8 rounded-xl bg-black bg-opacity-30 backdrop-blur-lg shadow-2xl">
-          <div className="flex justify-center mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+      <div className="d-flex align-items-center justify-content-center vh-100 bg-dark">
+        <div className="text-center p-4 rounded-3 bg-dark bg-opacity-75 backdrop-blur shadow-lg">
+          <div className="d-flex justify-content-center mb-4">
+            <i className="bi bi-exclamation-triangle-fill text-danger" style={{ fontSize: '4rem' }}></i>
           </div>
-          <h3 className="text-xl font-bold text-red-400">{error}</h3>
-          <p className="mt-2 text-gray-400">Por favor, tente novamente mais tarde</p>
+          <h3 className="text-danger fw-bold mb-3">{error}</h3>
+          <p className="text-muted">Por favor, tente novamente mais tarde</p>
           <button 
             onClick={() => window.location.reload()} 
-            className="mt-4 px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg hover:from-red-600 hover:to-pink-700 transition-colors duration-300"
+            className="btn btn-gradient mt-3"
           >
             Tentar novamente
           </button>
@@ -53,52 +51,46 @@ const Home = () => {
   }
 
   return (
-    <div 
-      className={`min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-    >
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className={`min-vh-100 bg-dark text-white transition-opacity ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Estrelas de fundo */}
+      <div className="position-absolute top-0 start-0 end-0 bottom-0 overflow-hidden pe-none">
         {[...Array(100)].map((_, i) => (
           <div 
             key={i}
-            className="absolute rounded-full bg-white"
+            className="position-absolute rounded-circle bg-white bg-opacity-50"
             style={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              width: `${Math.random() < 0.1 ? 3 : 1}px`,
-              height: `${Math.random() < 0.1 ? 3 : 1}px`,
-              opacity: Math.random() * 0.7 + 0.3,
+              width: `${Math.random() < 0.1 ? '0.2rem' : '0.1rem'}`,
+              height: `${Math.random() < 0.1 ? '0.2rem' : '0.1rem'}`,
               animation: `${Math.random() < 0.3 ? 'pulse' : ''} ${Math.random() * 4 + 3}s infinite ease-in-out`
             }}
-          ></div>
+          />
         ))}
       </div>
       
-      <div className="container mx-auto px-4 py-12 relative z-10">
-        <header className="text-center mb-12">
-          <div className="inline-block px-8 py-4 rounded-full bg-black bg-opacity-30 backdrop-blur-sm mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-            </svg>
-            <span className="text-xs uppercase tracking-widest text-gray-400">NASA APOD</span>
+      <div className="container py-5 position-relative">
+        <header className="text-center mb-5">
+          <div className="d-inline-block px-4 py-2 rounded-pill bg-dark bg-opacity-50 mb-3">
+            <i className="bi bi-stars text-primary me-2"></i>
+            <span className="text-uppercase small text-muted">NASA APOD</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+          <h1 className="display-4 fw-bold text-gradient mb-3">
             Imagem do espaço do Dia
           </h1>
-          <p className="text-gray-400 mt-2 max-w-2xl mx-auto">
+          <p className="lead text-muted mx-auto" style={{ maxWidth: '36rem' }}>
             Veja as maravilhas do espaço
           </p>
-          <div className="flex justify-center mt-4">
-            <div className="h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
+          <div className="d-flex justify-content-center mt-3">
+            <div className="bg-gradient" style={{ height: '0.15rem', width: '6rem' }}></div>
           </div>
         </header>
         
-        <div className="max-w-4xl mx-auto transform transition-all duration-700" style={{
-          transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
-        }}>
-          <div className="relative">
-            <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl opacity-30 blur-xl"></div>
+        <div className={`mx-auto transition-all ${isVisible ? 'translate-y-0' : 'translate-y-3'}`} style={{ maxWidth: '28rem' }}>
+          <div className="position-relative">
+            <div className="position-absolute top-0 start-0 end-0 bottom-0 bg-gradient rounded-3 opacity-25 blur"></div>
             
-            <div className="relative">
+            <div className="position-relative">
               <ApodCard
                 title={apodData.title}
                 explanation={apodData.explanation}
@@ -107,9 +99,9 @@ const Home = () => {
             </div>
           </div>
           
-          <div className="mt-6 text-center">
-            <div className="inline-block px-4 py-2 bg-black bg-opacity-50 backdrop-blur-sm rounded-full">
-              <span className="text-sm text-gray-400">
+          <div className="text-center mt-4">
+            <div className="d-inline-block px-3 py-1 bg-dark bg-opacity-50 rounded-pill">
+              <span className="small text-muted">
                 {new Date().toLocaleDateString('pt', { 
                   weekday: 'long', 
                   year: 'numeric', 
@@ -119,7 +111,6 @@ const Home = () => {
               </span>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
