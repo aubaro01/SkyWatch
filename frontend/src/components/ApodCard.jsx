@@ -36,7 +36,7 @@ const ApodCard = ({ title, explanation, imageUrl }) => {
           {title}
         </h2>
         
-        <p className="card-text text-muted mb-4" style={{ whiteSpace: 'pre-line' }}>
+        <p className="card-text text-white text-muted mb-4" style={{ whiteSpace: 'pre-line' }}>
           {explanation}
         </p>
 
