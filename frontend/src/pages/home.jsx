@@ -7,7 +7,6 @@ const Home = () => {
   const [apodData, setApodData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [darkMode, setDarkMode] = useState(false); 
 
   useEffect(() => {
     const getData = async () => {
@@ -24,10 +23,6 @@ const Home = () => {
     getData();
   }, []);
 
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
-  };
-
   if (loading) {
     return <Loader />;
   }
@@ -37,27 +32,20 @@ const Home = () => {
   }
 
   return (
-    <div
-      className={`container mx-auto p-4 min-vh-100 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}
-    >
-      <div className="d-flex justify-content-end">
-        <button
-          onClick={toggleDarkMode}
-          className="btn btn-secondary mb-4"
-        >
-          {darkMode ? 'Modo Claro' : 'Modo Escuro'}
-        </button>
-      </div>
-
-      <h1 className="text-center mb-4">Imagem do Dia da NASA</h1>
-
-      <div className="row">
-        <div className="col-12 col-md-6 col-lg-4 mx-auto">
-          <ApodCard
-            title={apodData.title}
-            explanation={apodData.explanation}
-            imageUrl={apodData.url}
-          />
+    <div className="container min-vh-100 d-flex flex-column justify-content-center align-items-center bg-dark text-light">
+      <h1 className="text-center mb-5 fw-bold fs-1 text-shadow">
+        Imagem do Dia da NASA
+      </h1>
+      <div className="card bg-secondary border-0 shadow-lg" style={{ width: '18rem' }}>
+        <img
+          src={apodData.url}
+          alt="Imagem do Dia"
+          className="card-img-top rounded-3"
+          style={{ objectFit: 'cover', height: '250px' }}
+        />
+        <div className="card-body">
+          <h5 className="card-title text-center mb-3">{apodData.title}</h5>
+          <p className="card-text">{apodData.explanation}</p>
         </div>
       </div>
     </div>
