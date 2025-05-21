@@ -15,7 +15,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* src/index.css */
+
 
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -36,6 +36,27 @@ body {
 .text-dark {
   color: #343a40 !important;
 }
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background-color: #ffffff;
+  color: #333333;
+  transition: all 0.3s ease;
+}
+
+.card-title {
+  transition: color 0.3s ease;
+}
+
+.card:hover .card-title {
+  color: #f7b731; 
+}
+
 
 
 a {

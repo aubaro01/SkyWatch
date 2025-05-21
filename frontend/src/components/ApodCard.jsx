@@ -3,28 +3,32 @@ import { Card, Button } from 'react-bootstrap';
 
 const ApodCard = ({ title, explanation, imageUrl }) => {
   return (
-    <Card className="mb-4 shadow-lg border-0 rounded-3">
+    <Card className="mb-4 shadow border-0 rounded-3 overflow-hidden">
       <Card.Img
         variant="top"
         src={imageUrl}
         alt={title}
-        className="rounded-3"
+        className="img-fluid"
         style={{
           objectFit: 'cover',
-          height: '250px', // Ajuste a altura da imagem conforme necessário
+          height: '250px',
         }}
       />
-      <Card.Body className="bg-dark text-light rounded-3">
-        <Card.Title className="fs-4 fw-bold mb-3">{title}</Card.Title>
-        <Card.Text className="mb-4">{explanation}</Card.Text>
-        <Button
-          variant="primary"
-          href={imageUrl}
-          target="_blank"
-          className="d-block mx-auto py-2 px-4 rounded-pill"
-        >
-          Ver imagem original
-        </Button>
+      <Card.Body className="bg-dark text-white p-4">
+        <Card.Title className="h4 mb-3 text-center">{title}</Card.Title>
+        <Card.Text className="text-muted">
+          {explanation.length > 150 ? explanation.slice(0, 150) + '...' : explanation}
+        </Card.Text>
+        <div className="d-flex justify-content-center">
+          <Button
+            variant="outline-light"
+            href={imageUrl}
+            target="_blank"
+            className="px-4 py-2 rounded-pill"
+          >
+            Ver imagem original
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );
