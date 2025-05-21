@@ -1,7 +1,7 @@
 const express = require('express');
 const serverless = require('serverless-http');
 const cors = require('cors');
-const apodRoutes = require('../Routes/apodRoute');
+const apodRoutes = require('./Routes/apodRoute');
 require('dotenv').config();
 
 const app = express();
