@@ -1,12 +1,18 @@
 import React from 'react';
+import { Card, Button } from 'react-bootstrap';
 
 const ApodCard = ({ title, explanation, imageUrl }) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
-      <p className="mt-2 text-gray-600">{explanation}</p>
-      {imageUrl && <img src={imageUrl} alt={title} className="mt-4 rounded-lg" />}
-    </div>
+    <Card className="mb-4 shadow-lg">
+      <Card.Img variant="top" src={imageUrl} alt={title} />
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>{explanation}</Card.Text>
+        <Button variant="primary" href={imageUrl} target="_blank">
+          Ver imagem original
+        </Button>
+      </Card.Body>
+    </Card>
   );
 };
 
