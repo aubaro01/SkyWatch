@@ -1,15 +1,20 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "./app.js",
-      "use": "@vercel/node"
+    "version": 2,
+    "builds": [
+      {
+        "src": "./app.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/app.js",
+        "headers": {
+        "Access-Control-Allow-Origin": "",
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Content-Type"
+      }
+      }
+    ]
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/apod",
-      "dest": "/app.js"
-    }
-  ]
-}
