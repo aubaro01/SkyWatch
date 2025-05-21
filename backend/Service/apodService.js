@@ -6,10 +6,14 @@ const getApodData = async () => {
     const response = await axios.get(NASA_APOD_URL, {
       params: {
         api_key: NASA_API_KEY
-      }
+      },
+      timeout: 10000 // 10 segundos
     });
     return response.data;
   } catch (error) {
+    if (error.code === 'ECONNABORTED') {
+      throw new Error('A requisição à API da NASA demorou mais de 10 segundos!');
+    }
     throw new Error('Erro ao buscar dados da NASA: ' + error.message);
   }
 };
