@@ -7,8 +7,13 @@ const getApodData = async () => {
       params: {
         api_key: NASA_API_KEY
       },
-      timeout: 10000 // 10 segundos
+      timeout: 10000 // 10 segundos de timeout
     });
+
+    if (response.status !== 200) {
+      throw new Error(`A API da NASA retornou erro: ${response.status}`);
+    }
+
     return response.data;
   } catch (error) {
     if (error.code === 'ECONNABORTED') {
