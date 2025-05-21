@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
+
 const ApodCard = ({ title, explanation, imageUrl }) => {
   return (
     <Card className="mb-4 shadow-lg">
