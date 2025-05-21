@@ -1,12 +1,23 @@
 const express = require('express');
-const serverless = require('serverless-http');
-const cors = require('cors');
-const apodRoutes = require('../Routes/apodRoute');
-require('dotenv').config();
-
+const axios = require('axios');
+require('dotenv').config(); 
+//const cors = require('cors');
+const apodRoutes = require('./Routes/apodRoute');
 const app = express();
 
-app.use(cors());
-app.use('/api', apodRoutes);
+// Middleware para permitir requisições do frontend (React)
+/*app.use(cors({
+  origin: process.env.REACT_APP_API_URL  
+}));*/
 
-module.exports.handler = serverless(app);
+app.use(express.json()); 
+
+
+app.use('/api', apodRoutes);
+app.get('/', (req, res) => {
+  res.status(200).json({ message: 'API online!!' });
+});
+
+module.exports = (req, res) => {
+  app(req, res);  
+};
