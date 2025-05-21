@@ -9,4 +9,4 @@ const app = express();
 app.use(cors());
 app.use('/api', apodRoutes);
 
-module.exports.handler = serverless(app);
+module.exports = serverless(app);
