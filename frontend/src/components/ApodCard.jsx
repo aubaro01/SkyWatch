@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 
 const ApodCard = ({ title, explanation, imageUrl }) => {
   const [isHovered, setIsHovered] = useState(false);
-  
-  const truncateText = (text, maxLength) => {
-    if (text.length <= maxLength) return text;
-    return text.slice(0, maxLength) + '...';
-  };
 
   return (
     <div 
@@ -15,32 +10,24 @@ const ApodCard = ({ title, explanation, imageUrl }) => {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         background: 'linear-gradient(135deg, #111827 0%, #1f2937 100%)',
-        maxWidth: '28rem'
+        maxWidth: '42rem'
       }}
     >
-      <div className="card-img-top position-relative" style={{ height: '18rem', overflow: 'hidden' }}>
-        <div 
-          className={`position-absolute w-100 h-100 transition-opacity ${isHovered ? 'opacity-30' : 'opacity-0'}`}
+      <div className="position-relative" style={{ height: '32rem', overflow: 'hidden' }}>
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-100 h-100 object-cover"
           style={{
-            background: 'linear-gradient(180deg, rgba(17, 24, 39, 0) 0%, rgba(17, 24, 39, 1) 100%)',
-            zIndex: 10
-          }}
-        />
-        
-        <div 
-          className="position-absolute w-100 h-100 transition-all"
-          style={{
-            transform: isHovered ? 'scale(1.1)' : 'scale(1)',
-            backgroundImage: `url(${imageUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+            transition: 'transform 0.5s ease'
           }}
         />
         
         <div 
           className={`position-absolute top-0 end-0 bg-dark bg-opacity-50 text-white p-2 rounded-circle m-3 z-20 transition-all ${isHovered ? 'opacity-100' : 'opacity-0'}`}
         >
-          <i className="bi bi-eye-fill"></i>
+          <i className="bi bi-stars"></i>
         </div>
       </div>
       
@@ -49,34 +36,19 @@ const ApodCard = ({ title, explanation, imageUrl }) => {
           {title}
         </h2>
         
-        <p className="card-text text-muted mb-4">
-          {truncateText(explanation, 150)}
+        <p className="card-text text-muted mb-4" style={{ whiteSpace: 'pre-line' }}>
+          {explanation}
         </p>
-        
-        <div className="d-flex justify-content-between align-items-center">
-          <a 
-            href={imageUrl} 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-gradient"
-          >
-            Ver imagem <i className="bi bi-box-arrow-up-right ms-2"></i>
-          </a>
-          
-          <button className="btn btn-dark rounded-circle p-0" style={{ width: '2.5rem', height: '2.5rem' }}>
-            <i className="bi bi-three-dots"></i>
-          </button>
-        </div>
+
+        <div 
+          className="position-absolute bottom-0 start-0 end-0 h-1 bg-gradient transition-all"
+          style={{ 
+            transform: isHovered ? 'scaleX(1)' : 'scaleX(0)', 
+            transformOrigin: 'left',
+            transition: 'transform 0.5s ease'
+          }}
+        />
       </div>
-      
-      <div 
-        className="position-absolute bottom-0 start-0 end-0 h-1 bg-gradient transition-all"
-        style={{ 
-          transform: isHovered ? 'scaleX(1)' : 'scaleX(0)', 
-          transformOrigin: 'left',
-          transition: 'transform 0.5s ease'
-        }}
-      />
     </div>
   );
 };
