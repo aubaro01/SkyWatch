@@ -25,7 +25,7 @@ const ApodCard = ({ title, explanation, imageUrl, date, copyright }) => {
 
         {copyright && (
           <div className="position-absolute bottom-0 end-0 p-2">
-            <span className="badge bg-dark bg-opacity-75 text-light small">© {copyright}</span>
+            <span className="badge bg-dark bg-opacity-75 text-dark small">© {copyright}</span>
           </div>
         )}
       </div>
@@ -59,10 +59,6 @@ const ApodCard = ({ title, explanation, imageUrl, date, copyright }) => {
               <i className="bi bi-calendar3 me-2"></i>
               {new Date(date).toLocaleDateString("pt-BR")}
             </small>
-            <a href={imageUrl} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-outline-primary">
-              <i className="bi bi-download me-1"></i>
-              Ver original
-            </a>
           </div>
         </div>
       )}

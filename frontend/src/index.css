@@ -1,79 +1,36 @@
+/* ===== Root Variables & Defaults ===== */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 }
 
-.text-gradient {
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* ===== Base Styles ===== */
+body {
+  background-color: #000;
+  overflow-x: hidden;
 }
 
-.btn-gradient {
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
-  border: none;
-  color: white;
-  transition: all 0.3s ease;
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
 }
 
-.btn-gradient:hover {
-  background: linear-gradient(to right, #2563eb, #7c3aed);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
 }
 
-.hover-scale:hover {
-  transform: scale(1.02);
-  transition: transform 0.3s ease;
-}
-
-.bg-gradient {
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
-}
-
-
-.bg-dark {
-  background-color: #121212 !important;
-}
-
-.text-white {
-  color: #ffffff !important;
-}
-
-.bg-light {
-  background-color: #f8f9fa !important;
-}
-
-.text-dark {
-  color: #343a40 !important;
-}
-
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
-}
-
-.card-title {
-  transition: color 0.3s ease;
-}
-
-.card:hover .card-title {
-  color: #3b82f6 !important;
+a:hover {
+  color: #535bf2;
 }
 
 button {
@@ -99,137 +56,34 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* ===== Text Colors & Backgrounds ===== */
+.text-white {
+  color: #ffffff !important;
 }
 
-a:hover {
-  color: #535bf2;
+.text-dark {
+  color: #343a40 !important;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.bg-dark {
+  background-color: #121212 !important;
 }
 
-/* Animações */
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+.bg-light {
+  background-color: #f8f9fa !important;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.bg-gradient {
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
 }
 
-.animate-spin {
-  animation: spin linear infinite;
-}
-
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.backdrop-blur {
-  backdrop-filter: blur(10px);
-}
-
-/* Media query para light mode */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  
-  a:hover {
-    color: #747bff;
-  }
-  
-  button {
-    background-color: #f9f9f9;
-  }
-  
-  .bg-dark {
-    background-color: #f8f9fa !important;
-  }
-  
-  .text-white {
-    color: #213547 !important;
-  }
-  
-  .card:hover .card-title {
-    color: #2563eb !important;
-  }
-}
-
-/* Animation keyframes */
-@keyframes twinkle {
-  0% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.2;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-body {
-  background-color: #000;
-  overflow-x: hidden;
-}
-
+/* ===== Gradients & Effects ===== */
 .text-gradient {
   background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
-}
-
-.cosmic-divider {
-  height: 3px;
-  width: 100px;
-  background: linear-gradient(
-    90deg,
-    rgba(79, 172, 254, 0.1) 0%,
-    rgba(79, 172, 254, 1) 50%,
-    rgba(79, 172, 254, 0.1) 100%
-  );
-  border-radius: 3px;
-  margin: 10px 0;
-}
-
-.cosmic-glow {
-  background: radial-gradient(circle, rgba(79, 172, 254, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
-  filter: blur(20px);
 }
 
 .btn-gradient {
@@ -246,13 +100,32 @@ body {
   box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
 }
 
-.stars-container {
-  z-index: 0;
+/* ===== Card Effects ===== */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.star {
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-title {
+  transition: color 0.3s ease;
+}
+
+.card:hover .card-title {
+  color: #3b82f6 !important;
+}
+
+/* ===== Utility Classes ===== */
+.hover-scale:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+.backdrop-blur {
+  backdrop-filter: blur(10px);
 }
 
 .transition-opacity {
@@ -271,6 +144,7 @@ body {
   transform: translateY(30px);
 }
 
+/* ===== Text Truncation ===== */
 .text-truncate-container {
   max-height: 100px;
   overflow: hidden;
@@ -287,6 +161,7 @@ body {
   background: linear-gradient(to bottom, rgba(33, 37, 41, 0) 0%, rgba(33, 37, 41, 1) 100%);
 }
 
+/* ===== Loader Animation ===== */
 .cosmic-loader {
   width: 80px;
   height: 80px;
@@ -326,7 +201,101 @@ body {
   animation: rotate 1s linear infinite;
 }
 
+/* ===== Custom Components ===== */
+.cosmic-divider {
+  height: 3px;
+  width: 100px;
+  background: linear-gradient(
+    90deg,
+    rgba(79, 172, 254, 0.1) 0%,
+    rgba(79, 172, 254, 1) 50%,
+    rgba(79, 172, 254, 0.1) 100%
+  );
+  border-radius: 3px;
+  margin: 10px 0;
+}
 
+.cosmic-glow {
+  background: radial-gradient(circle, rgba(79, 172, 254, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(20px);
+}
+
+.stars-container {
+  z-index: 0;
+}
+
+.star {
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* ===== Animations ===== */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-spin {
+  animation: rotate linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ===== Light Mode Support ===== */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+
+  .bg-dark {
+    background-color: #f8f9fa !important;
+  }
+
+  .text-white {
+    color: #213547 !important;
+  }
+
+  .card:hover .card-title {
+    color: #2563eb !important;
+  }
+}
+
+/* ===== Responsive Typography ===== */
 @media (max-width: 768px) {
   .display-3 {
     font-size: 2.5rem;
