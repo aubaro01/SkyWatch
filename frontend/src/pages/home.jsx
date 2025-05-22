@@ -70,7 +70,7 @@ const Home = () => {
           <div className="d-inline-block px-4 py-2 rounded-pill bg-dark bg-opacity-50 mb-3">
             <i className="bi bi-stars text-primary me-2"></i>
             <span className="text-uppercase small text-muted">NASA APOD</span>
-          </div>
+          </div><br />
           <h1 className="display-4 fw-bold text-gradient mb-3">Imagem do espaço do Dia</h1>
           <p className="lead text-muted mx-auto" style={{ maxWidth: "36rem" }}>
             Veja as maravilhas do universo através da NASA
@@ -80,37 +80,40 @@ const Home = () => {
           </div>
         </header>
 
-        <div
-          className={`mx-auto transition-all ${isVisible ? "translate-y-0" : "translate-y-3"}`}
-          style={{ maxWidth: "32rem" }}
-        >
-          <div className="position-relative">
-            <div className="position-absolute top-0 start-0 end-0 bottom-0 cosmic-glow rounded-3"></div>
-
+        <div className="d-flex align-items-center justify-content-center min-vh-100 bg-black">
+          <div
+            className={`w-100 px-3 transition-all ${isVisible ? "translate-y-0" : "translate-y-3"}`}
+            style={{ maxWidth: "32rem" }}
+          >
             <div className="position-relative">
-              <ApodCard
-                title={apodData.title}
-                explanation={apodData.explanation}
-                imageUrl={apodData.url}
-                date={apodData.date}
-                copyright={apodData.copyright}
-              />
-            </div>
-          </div>
+              <div className="position-absolute top-0 start-0 end-0 bottom-0 cosmic-glow rounded-3"></div>
 
-          <div className="text-center mt-4">
-            <div className="d-inline-block px-3 py-1 bg-dark bg-opacity-50 rounded-pill">
-              <span className="small text-muted">
-                {new Date().toLocaleDateString("pt-BR", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
+              <div className="position-relative">
+                <ApodCard
+                  title={apodData.title}
+                  explanation={apodData.explanation}
+                  imageUrl={apodData.url}
+                  date={apodData.date}
+                  copyright={apodData.copyright}
+                />
+              </div>
+            </div>
+
+            <div className="text-center mt-4">
+              <div className="d-inline-block px-3 py-1 bg-dark bg-opacity-50 rounded-pill">
+                <span className="small text-muted">
+                  {new Date().toLocaleDateString("pt-BR", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   )
