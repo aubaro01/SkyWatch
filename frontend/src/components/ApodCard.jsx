@@ -5,71 +5,78 @@ const ApodCard = ({ title, explanation, imageUrl, date, copyright }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div className="card bg-dark text-white border-0 overflow-hidden shadow-lg h-100 d-flex flex-column">
-      <div className="position-relative">
-        {!imageLoaded && (
-          <div className="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
+    <div className="position-relative overflow-hidden rounded-4 cosmic-card">
+      {/* Fundo estelar */}
+      <div className="position-absolute top-0 start-0 end-0 bottom-0 cosmic-backdrop">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="position-absolute rounded-circle cosmic-particle"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 4 + 2}px`,
+              height: `${Math.random() * 4 + 2}px`,
+              opacity: Math.random() * 0.6 + 0.2,
+              animation: `pulse ${Math.random() * 8 + 4}s infinite ease-in-out`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Conteúdo principal */}
+      <div className="position-relative d-flex flex-column h-100 z-2">
+        <div className="position-relative overflow-hidden cosmic-image-container">
+          {!imageLoaded && (
+            <div className="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark bg-opacity-75">
+              <div className="cosmic-spinner"></div>
             </div>
+          )}
+          <div className="h-100 overflow-hidden position-relative">
+            <img
+              src={imageUrl || "/placeholder.svg"}
+              className={`w-100 h-100 object-fit-cover parallax-image ${imageLoaded ? "loaded" : ""}`}
+              alt={title}
+              onLoad={() => setImageLoaded(true)}
+            />
           </div>
-        )}
 
-        <img
-          src={imageUrl || "/placeholder.svg"}
-          className="card-img-top w-100"
-          alt={title}
-          style={{
-            opacity: imageLoaded ? 1 : 0,
-            transition: "opacity 0.5s ease-in-out",
-            objectFit: "cover",
-            maxHeight: "500px",
-          }}
-          onLoad={() => setImageLoaded(true)}
-        />
+          {copyright && (
+            <div className="position-absolute bottom-0 end-0 m-3">
+              <span className="bg-dark bg-opacity-75 text-light px-2 py-1 rounded-pill small">
+                © {copyright}
+              </span>
+            </div>
+          )}
+        </div>
 
-        {copyright && (
-          <div className="position-absolute bottom-0 end-0 p-2">
-            <span className="badge bg-dark bg-opacity-75 text-light small">© {copyright}</span>
+        <div className={`p-4 text-light cosmic-text-content ${expanded ? "expanded" : ""}`}>
+          <div className="d-flex justify-content-between align-items-start mb-3">
+            <h2 className="m-0 cosmic-title">{title}</h2>
+            <button
+              className="btn btn-sm btn-link text-primary p-0"
+              onClick={() => setExpanded(!expanded)}
+              aria-label={expanded ? "Mostrar menos" : "Ler mais"}
+            >
+              <i className={`bi ${expanded ? "bi-chevron-up" : "bi-chevron-down"}`}></i>
+            </button>
           </div>
-        )}
+
+          <div className="text-primary small mb-3">
+            <i className="bi bi-calendar3 me-2"></i>
+            {new Date(date).toLocaleDateString("pt-BR", {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </div>
+
+          <div className={`cosmic-explanation ${expanded ? "expanded" : "collapsed"}`}>
+            <p>{explanation}</p>
+          </div>
+        </div>
       </div>
-
-      <div className="card-body bg-dark bg-opacity-90 p-4 flex-grow-1 d-flex flex-column">
-        <h2 className="card-title fw-bold mb-3">{title}</h2>
-
-        <div className={`card-text ${expanded ? "" : "text-truncate-container"}`}>
-          <p className="text-muted mb-0">{explanation}</p>
-        </div>
-
-        <div className="mt-auto">
-          <button
-            className="btn btn-link text-primary p-0 mt-2"
-            onClick={() => setExpanded(!expanded)}
-          >
-            {expanded ? (
-              <>
-                <i className="bi bi-chevron-up me-1"></i>Mostrar menos
-              </>
-            ) : (
-              <>
-                <i className="bi bi-chevron-down me-1"></i>Ler mais
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-
-      {date && (
-        <div className="card-footer bg-dark bg-opacity-90 text-muted border-top border-secondary border-opacity-25 py-3">
-          <div className="d-flex justify-content-between align-items-center">
-            <small>
-              <i className="bi bi-calendar3 me-2"></i>
-              {new Date(date).toLocaleDateString("pt-BR")}
-            </small>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
