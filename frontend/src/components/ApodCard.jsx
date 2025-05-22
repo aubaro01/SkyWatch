@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./apod-card.css";
 
 const ApodCard = ({ title, explanation, imageUrl, date, copyright }) => {
   const [expanded, setExpanded] = useState(false);
