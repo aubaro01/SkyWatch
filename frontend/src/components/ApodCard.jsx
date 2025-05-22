@@ -1,12 +1,11 @@
-
-import { useState } from "react"
+import { useState } from "react";
 
 const ApodCard = ({ title, explanation, imageUrl, date, copyright }) => {
-  const [expanded, setExpanded] = useState(false)
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const [expanded, setExpanded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div className="card bg-dark text-white border-0 overflow-hidden shadow-lg">
+    <div className="card bg-dark text-white border-0 overflow-hidden shadow-lg h-100 d-flex flex-column">
       <div className="position-relative">
         {!imageLoaded && (
           <div className="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark">
@@ -15,41 +14,50 @@ const ApodCard = ({ title, explanation, imageUrl, date, copyright }) => {
             </div>
           </div>
         )}
+
         <img
           src={imageUrl || "/placeholder.svg"}
-          className="card-img-top"
+          className="card-img-top w-100"
           alt={title}
-          style={{ opacity: imageLoaded ? 1 : 0, transition: "opacity 0.5s ease-in-out" }}
+          style={{
+            opacity: imageLoaded ? 1 : 0,
+            transition: "opacity 0.5s ease-in-out",
+            objectFit: "cover",
+            maxHeight: "500px",
+          }}
           onLoad={() => setImageLoaded(true)}
         />
 
         {copyright && (
           <div className="position-absolute bottom-0 end-0 p-2">
-            <span className="badge bg-dark bg-opacity-75 text-dark small">© {copyright}</span>
+            <span className="badge bg-dark bg-opacity-75 text-light small">© {copyright}</span>
           </div>
         )}
       </div>
 
-      <div className="card-body bg-dark bg-opacity-90 p-4">
+      <div className="card-body bg-dark bg-opacity-90 p-4 flex-grow-1 d-flex flex-column">
         <h2 className="card-title fw-bold mb-3">{title}</h2>
 
         <div className={`card-text ${expanded ? "" : "text-truncate-container"}`}>
           <p className="text-muted mb-0">{explanation}</p>
         </div>
 
-        <button className="btn btn-link text-primary p-0 mt-2" onClick={() => setExpanded(!expanded)}>
-          {expanded ? (
-            <>
-              <i className="bi bi-chevron-up me-1"></i>
-              Mostrar menos
-            </>
-          ) : (
-            <>
-              <i className="bi bi-chevron-down me-1"></i>
-              Ler mais
-            </>
-          )}
-        </button>
+        <div className="mt-auto">
+          <button
+            className="btn btn-link text-primary p-0 mt-2"
+            onClick={() => setExpanded(!expanded)}
+          >
+            {expanded ? (
+              <>
+                <i className="bi bi-chevron-up me-1"></i>Mostrar menos
+              </>
+            ) : (
+              <>
+                <i className="bi bi-chevron-down me-1"></i>Ler mais
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {date && (
@@ -63,7 +71,7 @@ const ApodCard = ({ title, explanation, imageUrl, date, copyright }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ApodCard
+export default ApodCard;
