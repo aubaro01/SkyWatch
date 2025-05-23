@@ -28,7 +28,7 @@ const ApodSection = ({ title, explanation, imageUrl, date, copyright }) => {
         />
 
         <div className="d-flex justify-content-between align-items-center mb-2">
-          <h2 className="h4 mb-0 text-gradient">{title}</h2>
+          <h2 className="h4 mb-0 text-info">{title}</h2>
           {copyright && (
             <span className="small text-muted">©{copyright}</span>
           )}
@@ -36,7 +36,7 @@ const ApodSection = ({ title, explanation, imageUrl, date, copyright }) => {
 
         <p className="text-muted mb-3">
           <i className="bi bi-calendar3 me-2"></i>
-          {new Date(date).toLocaleDateString("pt-BR", {
+          {new Date(date).toLocaleDateString("pt-PT", {
             weekday: "long",
             day: "numeric",
             month: "long",

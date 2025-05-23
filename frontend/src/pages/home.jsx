@@ -71,7 +71,7 @@ const Home = () => {
             <i className="bi bi-stars text-primary me-2"></i>
             <span className="text-uppercase small text-muted">NASA APOD</span>
           </div><br />
-          <h1 className="display-4 fw-bold text-gradient mb-3">Imagem do espaço do Dia</h1>
+          <h1 className="display-4 fw-bold text-info mb-3">Imagem do espaço do Dia</h1>
           <p className="lead text-muted mx-auto" style={{ maxWidth: "36rem" }}>
             Veja as maravilhas do universo através da NASA
           </p>
