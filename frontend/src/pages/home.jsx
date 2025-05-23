@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { fetchApodData } from "../services/nasaApi"
-import ApodSection from "../components/ApodCard" 
+import ApodSection from "../components/ApodCard"
 import Loader from "../components/Loader"
 
 const Home = () => {
@@ -8,6 +8,13 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [darkMode, setDarkMode] = useState(() => {
+    // Usa o localStorage se disponível, senão true (modo dark padrão)
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("darkMode") === "false" ? false : true
+    }
+    return true
+  })
 
   useEffect(() => {
     const getData = async () => {
@@ -26,19 +33,27 @@ const Home = () => {
     getData()
   }, [])
 
+  const toggleTheme = () => {
+    setDarkMode((prev) => {
+      const newMode = !prev
+      localStorage.setItem("darkMode", newMode)
+      return newMode
+    })
+  }
+
   if (loading) {
     return <Loader />
   }
 
   if (error) {
     return (
-      <div className="d-flex align-items-center justify-content-center vh-100 bg-dark">
-        <div className="text-center p-4 rounded-3 bg-dark bg-opacity-75 backdrop-blur shadow-lg">
+      <div className={`d-flex align-items-center justify-content-center vh-100 ${darkMode ? "bg-dark" : "bg-light"}`}>
+        <div className={`text-center p-4 rounded-3 ${darkMode ? "bg-dark bg-opacity-75 text-white" : "bg-light text-dark"} backdrop-blur shadow-lg`}>
           <div className="d-flex justify-content-center mb-4">
             <i className="bi bi-exclamation-triangle-fill text-danger" style={{ fontSize: "4rem" }}></i>
           </div>
           <h3 className="text-danger fw-bold mb-3">{error}</h3>
-          <p className="text-muted">Por favor, tente novamente mais tarde</p>
+          <p className={darkMode ? "text-muted" : "text-secondary"}>Por favor, tente novamente mais tarde</p>
           <button onClick={() => window.location.reload()} className="btn btn-gradient mt-3">
             Tentar novamente
           </button>
@@ -48,31 +63,21 @@ const Home = () => {
   }
 
   return (
-    <div className={`min-vh-100 bg-dark text-white transition-opacity ${isVisible ? "opacity-100" : "opacity-0"}`}>
-      <div className="position-absolute top-0 start-0 end-0 bottom-0 overflow-hidden pe-none">
-        {[...Array(100)].map((_, i) => (
-          <div
-            key={i}
-            className="position-absolute rounded-circle bg-white bg-opacity-50"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              width: `${Math.random() < 0.1 ? "0.2rem" : "0.1rem"}`,
-              height: `${Math.random() < 0.1 ? "0.2rem" : "0.1rem"}`,
-              animation: `${Math.random() < 0.3 ? "pulse" : ""} ${Math.random() * 4 + 3}s infinite ease-in-out`,
-            }}
-          />
-        ))}
-      </div>
-
+    <div className={`min-vh-100 transition-opacity ${darkMode ? "bg-dark text-white" : "bg-light text-dark"} ${isVisible ? "opacity-100" : "opacity-0"}`}>
       <div className="container py-5 position-relative">
+        <div className="text-end mb-3">
+          <button className={`btn btn-sm ${darkMode ? "btn-outline-light" : "btn-outline-dark"}`} onClick={toggleTheme}>
+            {darkMode ? "Modo Claro ☀️" : "Modo Escuro 🌙"}
+          </button>
+        </div>
+
         <header className="text-center mb-5">
-          <div className="d-inline-block px-4 py-2 rounded-pill bg-dark bg-opacity-50 mb-3">
+          <div className={`d-inline-block px-4 py-2 rounded-pill ${darkMode ? "bg-dark bg-opacity-50" : "bg-light bg-opacity-50"} mb-3`}>
             <i className="bi bi-stars text-primary me-2"></i>
             <span className="text-uppercase small text-muted">NASA APOD</span>
           </div><br />
-          <h1 className="display-4 fw-bold text-info mb-3">Imagem do espaço do Dia</h1>
-          <p className="lead text-muted mx-auto" style={{ maxWidth: "36rem" }}>
+          <h1 className={`display-4 fw-bold ${darkMode ? "text-info" : "text-primary" } mb-3`}>Imagem do espaço do Dia</h1>
+          <p className={`lead mx-auto`} style={{ maxWidth: "36rem", color: darkMode ? "#adb5bd" : "#6c757d" }}>
             Veja as maravilhas do universo através da NASA
           </p>
           <div className="d-flex justify-content-center mt-3">
@@ -90,8 +95,8 @@ const Home = () => {
           />
 
           <div className="text-center mt-4">
-            <div className="d-inline-block px-3 py-1 bg-dark bg-opacity-50 rounded-pill">
-              <span className="small text-muted">
+            <div className={`d-inline-block px-3 py-1 rounded-pill ${darkMode ? "bg-dark bg-opacity-50 text-muted" : "bg-light text-secondary"}`}>
+              <span className="small">
                 {new Date().toLocaleDateString("pt-PT", {
                   weekday: "long",
                   year: "numeric",
