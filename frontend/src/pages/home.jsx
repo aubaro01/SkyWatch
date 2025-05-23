@@ -53,10 +53,7 @@ const Home = () => {
           </div>
           <h3 className="text-danger fw-bold mb-3">{error}</h3>
           <p className={darkMode ? "text-muted" : "text-secondary"}>Por favor, tente novamente mais tarde</p>
-          <button
-            onClick={() => window.location.reload()}
-            className={darkMode ? "btn btn-outline-light mt-3" : "btn btn-outline-dark mt-3"}
-          >
+          <button onClick={() => window.location.reload()} className="btn btn-gradient mt-3">
             Tentar novamente
           </button>
         </div>
@@ -67,15 +64,11 @@ const Home = () => {
   return (
     <div
       className={`min-vh-100 transition-opacity ${darkMode ? "bg-dark text-white" : "bg-light text-dark"} ${isVisible ? "opacity-100" : "opacity-0"}`}
-      style={{ transition: "background-color 0.3s, color 0.3s", minHeight: "100vh" }}
+      style={{ transition: "background-color 0.3s, color 0.3s" }}
     >
       <div className="container py-5 position-relative">
         <div className="text-end mb-3">
-          <button
-            className={`btn btn-sm ${darkMode ? "btn-outline-light" : "btn-outline-dark"}`}
-            onClick={toggleTheme}
-            aria-label={darkMode ? "Mudar para modo claro" : "Mudar para modo escuro"}
-          >
+          <button className={`btn btn-sm ${darkMode ? "btn-outline-light" : "btn-outline-dark"}`} onClick={toggleTheme}>
             {darkMode ? "Modo Claro ☀️" : "Modo Escuro 🌙"}
           </button>
         </div>
@@ -101,7 +94,7 @@ const Home = () => {
             imageUrl={apodData.url}
             date={apodData.date}
             copyright={apodData.copyright}
-            darkMode={darkMode}
+            darkMode={darkMode} // passe para o componente caso queira usar dentro dele
           />
 
           <div className="text-center mt-4">
