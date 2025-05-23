@@ -16,25 +16,21 @@ const ApodSection = ({ title, explanation, imageUrl, date, copyright }) => {
           </div>
         )}
 
-        {imageLoaded && (
-          <div className="text-center">
-            <img
-              src={imageUrl}
-              alt={title}
-              onLoad={() => setImageLoaded(true)}
-              className="img-fluid rounded-3 mb-4 mx-auto"
-              style={{
-                boxShadow: "0 0 12px rgba(255, 255, 255, 0.2)",
-                maxHeight: "600px",
-              }}
-            />
-          </div>
-        )}
+        <img
+          src={imageUrl}
+          alt={title}
+          onLoad={() => setImageLoaded(true)}
+          className="img-fluid rounded-3 mb-4 w-100 text-center"
+          style={{
+            display: imageLoaded ? "block" : "none",
+            boxShadow: "0 0 12px rgba(255, 255, 255, 0.2)",
+          }}
+        />
 
         <div className="d-flex justify-content-between align-items-center mb-2">
           <h2 className="h4 mb-0 text-gradient">{title}</h2>
           {copyright && (
-            <span className="small text-muted">© {copyright}</span>
+            <span className="small text-muted">©{copyright}</span>
           )}
         </div>
 
