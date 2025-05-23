@@ -63,7 +63,7 @@ const ApodSection = ({ title, explanation, imageUrl, date, copyright }) => {
           </p>
 
           <button
-            className="btn btn-sm btn-outline-light"
+            className="btn btn-sm text-dark btn-outline-light"
             onClick={() => setExpanded(!expanded)}
             aria-label={expanded ? "Mostrar menos" : "Ler mais"}
           >
