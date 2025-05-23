@@ -1,16 +1,37 @@
 import { useState } from "react";
 
-const ApodSection = ({ title, explanation, imageUrl, date, copyright }) => {
+const ApodSection = ({
+  title,
+  explanation,
+  imageUrl,
+  date,
+  copyright,
+  darkMode = true, 
+}) => {
   const [expanded, setExpanded] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
+ 
+  const bgClass = darkMode ? "bg-dark bg-opacity-75 text-white" : "bg-light text-dark";
+  const shadowColor = darkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.1)";
+  const buttonClass = darkMode
+    ? "btn btn-sm btn-outline-light text-white"
+    : "btn btn-sm btn-outline-dark text-dark";
+  const titleColor = darkMode ? "text-info" : "text-primary";
+  const textMutedClass = darkMode ? "text-muted" : "text-secondary";
+  const copyrightClass = darkMode ? "text-muted" : "text-secondary";
+
   return (
     <section className="my-5 px-3">
-      <div className="bg-dark bg-opacity-50 text-white rounded-4 shadow-lg p-4 position-relative overflow-hidden">
-
+      <div
+        className={`rounded-4 shadow-lg p-4 position-relative overflow-hidden ${bgClass}`}
+      >
         {!imageLoaded && (
-          <div className="d-flex justify-content-center align-items-center" style={{ height: "300px" }}>
-            <div className="spinner-border text-light" role="status">
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{ height: "300px" }}
+          >
+            <div className={`spinner-border ${darkMode ? "text-light" : "text-secondary"}`} role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
           </div>
@@ -20,21 +41,21 @@ const ApodSection = ({ title, explanation, imageUrl, date, copyright }) => {
           src={imageUrl}
           alt={title}
           onLoad={() => setImageLoaded(true)}
-          className="img-fluid rounded-3 mb-4 w-100 text-center"
+          className="img-fluid rounded-3 mb-4 w-100"
           style={{
             display: imageLoaded ? "block" : "none",
-            boxShadow: "0 0 12px rgba(255, 255, 255, 0.2)",
+            boxShadow: `0 0 12px ${shadowColor}`,
           }}
         />
 
         <div className="d-flex justify-content-between align-items-center mb-2">
-          <h2 className="h4 mb-0 text-info">{title}</h2>
+          <h2 className={`h4 mb-0 ${titleColor}`}>{title}</h2>
           {copyright && (
-            <span className="small text-muted">©{copyright}</span>
+            <span className={`small ${copyrightClass}`}>©{copyright}</span>
           )}
         </div>
 
-        <p className="text-muted mb-3">
+        <p className={`${textMutedClass} mb-3`}>
           <i className="bi bi-calendar3 me-2"></i>
           {new Date(date).toLocaleDateString("pt-PT", {
             weekday: "long",
@@ -63,7 +84,7 @@ const ApodSection = ({ title, explanation, imageUrl, date, copyright }) => {
           </p>
 
           <button
-            className="btn btn-sm text-dark btn-outline-light"
+            className={buttonClass}
             onClick={() => setExpanded(!expanded)}
             aria-label={expanded ? "Mostrar menos" : "Ler mais"}
           >

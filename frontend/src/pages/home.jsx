@@ -9,7 +9,6 @@ const Home = () => {
   const [error, setError] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
   const [darkMode, setDarkMode] = useState(() => {
-    // Usa o localStorage se disponível, senão true (modo dark padrão)
     if (typeof window !== "undefined") {
       return localStorage.getItem("darkMode") === "false" ? false : true
     }
@@ -29,7 +28,6 @@ const Home = () => {
         setLoading(false)
       }
     }
-
     getData()
   }, [])
 
@@ -54,7 +52,10 @@ const Home = () => {
           </div>
           <h3 className="text-danger fw-bold mb-3">{error}</h3>
           <p className={darkMode ? "text-muted" : "text-secondary"}>Por favor, tente novamente mais tarde</p>
-          <button onClick={() => window.location.reload()} className="btn btn-gradient mt-3">
+          <button
+            onClick={() => window.location.reload()}
+            className={darkMode ? "btn btn-outline-light mt-3" : "btn btn-outline-dark mt-3"}
+          >
             Tentar novamente
           </button>
         </div>
@@ -63,7 +64,10 @@ const Home = () => {
   }
 
   return (
-    <div className={`min-vh-100 transition-opacity ${darkMode ? "bg-dark text-white" : "bg-light text-dark"} ${isVisible ? "opacity-100" : "opacity-0"}`} style={{ minHeight: "100vh" }}>
+    <div
+      className={`min-vh-100 transition-opacity ${darkMode ? "bg-dark text-white" : "bg-light text-dark"} ${isVisible ? "opacity-100" : "opacity-0"}`}
+      style={{ minHeight: "100vh", transition: "background-color 0.3s, color 0.3s" }}
+    >
       {darkMode && (
         <div className="position-absolute top-0 start-0 end-0 bottom-0 overflow-hidden pe-none">
           {[...Array(100)].map((_, i) => (
@@ -84,11 +88,14 @@ const Home = () => {
 
       <div className="container py-5 position-relative">
         <div className="text-end mb-3">
-          <button className={`btn btn-sm ${darkMode ? "btn-outline-light" : "btn-outline-dark"}`} onClick={toggleTheme}>
+          <button
+            className={`btn btn-sm ${darkMode ? "btn-outline-light" : "btn-outline-dark"}`}
+            onClick={toggleTheme}
+            aria-label={darkMode ? "Mudar para modo claro" : "Mudar para modo escuro"}
+          >
             {darkMode ? "Modo Claro ☀️" : "Modo Escuro 🌙"}
           </button>
         </div>
-
 
         <ApodSection
           title={apodData.title}
