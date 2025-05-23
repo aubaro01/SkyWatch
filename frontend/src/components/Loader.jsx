@@ -22,7 +22,7 @@ const Loader = () => {
 
       <h2 className="text-white mb-3 fw-light">Dados encontrados...</h2>
 
-      <div className="text-center text-muted">
+      <div className="text-center text-white text-muted">
         <p className="mb-0">Buscando a imagem astronômica do dia</p>
         <p className="small">NASA Astronomy Picture of the Day</p>
       </div>
