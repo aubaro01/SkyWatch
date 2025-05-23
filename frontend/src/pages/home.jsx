@@ -94,7 +94,7 @@ const Home = () => {
             imageUrl={apodData.url}
             date={apodData.date}
             copyright={apodData.copyright}
-            darkMode={darkMode} // passe para o componente caso queira usar dentro dele
+            darkMode={darkMode}
           />
 
           <div className="text-center mt-4">
