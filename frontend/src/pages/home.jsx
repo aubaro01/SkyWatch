@@ -2,38 +2,29 @@ import { useState, useEffect } from "react"
 import { fetchApodData } from "../services/nasaApi"
 import ApodSection from "../components/ApodCard" 
 import Loader from "../components/Loader"
-import DatePicker from "react-datepicker"
-import { subDays } from "date-fns"
-import "react-datepicker/dist/react-datepicker.css"
 
 const Home = () => {
   const [apodData, setApodData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [selectedDate, setSelectedDate] = useState(new Date())
-
-  const getData = async (dateToFetch = new Date()) => {
-    try {
-      setLoading(true)
-      setIsVisible(false)
-
-      const formattedDate = dateToFetch.toISOString().split("T")[0]
-      const data = await fetchApodData(formattedDate)
-
-      setApodData(data)
-      setLoading(false)
-      setTimeout(() => setIsVisible(true), 100)
-    } catch (err) {
-      console.error("Error fetching data:", err)
-      setError("Não foi possível carregar a imagem do dia")
-      setLoading(false)
-    }
-  }
 
   useEffect(() => {
-    getData(selectedDate)
-  }, [selectedDate])
+    const getData = async () => {
+      try {
+        const data = await fetchApodData()
+        setApodData(data)
+        setLoading(false)
+        setTimeout(() => setIsVisible(true), 100)
+      } catch (err) {
+        console.error("Error fetching data:", err)
+        setError("Não foi possível carregar a imagem do dia")
+        setLoading(false)
+      }
+    }
+
+    getData()
+  }, [])
 
   if (loading) {
     return <Loader />
@@ -89,18 +80,6 @@ const Home = () => {
           </div>
         </header>
 
-        <div className="text-center mb-4">
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-            dateFormat="yyyy-MM-dd"
-            maxDate={new Date()}
-            minDate={new Date("1995-06-16")}
-            className="form-control d-inline-block w-auto"
-            calendarClassName="bg-dark text-white"
-          />
-        </div>
-
         <div className={`px-3 transition-all ${isVisible ? "translate-y-0" : "translate-y-3"}`}>
           <ApodSection
             title={apodData.title}
@@ -113,7 +92,7 @@ const Home = () => {
           <div className="text-center mt-4">
             <div className="d-inline-block px-3 py-1 bg-dark bg-opacity-50 rounded-pill">
               <span className="small text-muted">
-                {new Date().toLocaleDateString("pt-BR", {
+                {new Date().toLocaleDateString("pt-PT", {
                   weekday: "long",
                   year: "numeric",
                   month: "long",
